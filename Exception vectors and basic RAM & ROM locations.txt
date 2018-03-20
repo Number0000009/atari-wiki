@@ -1,0 +1,122 @@
+<pre>
+===========#==#=======#===============================================#=====
+----------------------|Exeption Vectors                               |-----
+===========#==#=======#===============================================#=====
+$00000000.L|R-|XPT_SPR|SSP after Reset                                |
+$00000004.L|R-|XPT_PCR|PC  after Reset                                |
+$00000008.L|RW|XPT_BUS|Bus Error                                      |
+$0000000C.L|RW|XPT_ADR|Address Error                                  |
+$00000010.L|RW|XPT_ILL|Illegal Instruction                            |
+$00000014.L|RW|XPT_DBZ|Devide by Zero                                 |
+$00000018.L|RW|XPT_CHK|Chk, Chk2 Instruction                          |
+$0000001C.L|RW|XPT_TRV|Trapv Instruction                              |
+$00000020.L|RW|XPT_PRV|Privilege Violation                            |
+$00000024.L|RW|XPT_TRC|Trace                                          |
+$00000028.L|RW|XPT_LNA|Linea                                          |
+$0000002C.L|RW|XPT_LNF|Linef                                          |
+$00000030.L|RW|   -   |reserved                                       |
+$00000034.L|RW|XPT_FPU|Coprocessor Protocol Violation                 |030+
+$00000038.L|RW|XPT_FRM|Format Error                                   |010+
+$0000003C.L|RW|XPT_DSP|DSP Transfer Interrupt                         |*
+$00000040.L|RW|   -   |reserved                                       |
+$00000044.L|RW|   -   |reserved                                       |
+$00000048.L|RW|   -   |reserved                                       |
+$0000004C.L|RW|   -   |reserved                                       |
+$00000050.L|RW|   -   |reserved                                       |
+$00000054.L|RW|   -   |reserved                                       |
+$00000058.L|RW|   -   |reserved                                       |
+$0000005C.L|RW|   -   |reserved                                       |
+$00000060.L|RW|XPT_SPU|Spurious Interrupt                             |
+$00000064.L|RW|XPT_LV1|Level 1 -                                      |
+$00000068.L|RW|XPT_HBL|Level 2 - HBL                                  |
+$0000006C.L|RW|XPT_LV3|Level 3 -                                      |
+$00000070.L|RW|XPT_VBL|Level 4 - VBL                                  |
+$00000074.L|RW|XPT_LV5|Level 5 - SCC                                  |    
+$00000078.L|RW|XPT_LV6|Level 6 - MFP                                  |
+$0000007C.L|RW|XPT_LV7|Level 7 -                                      |
+$00000080.L|RW|XPT_T00|Trap #00                                       |
+$00000084.L|RW|XPT_T01|Trap #01                                       |
+$00000088.L|RW|XPT_T02|Trap #02                                       |
+$0000008C.L|RW|XPT_T03|Trap #03                                       |
+$00000090.L|RW|XPT_T04|Trap #04                                       |
+$00000094.L|RW|XPT_T05|Trap #05                                       |
+$00000098.L|RW|XPT_T06|Trap #06                                       |
+$0000009C.L|RW|XPT_T07|Trap #07                                       |
+$000000A0.L|RW|XPT_T08|Trap #08                                       |
+$000000A4.L|RW|XPT_T09|Trap #09                                       |
+$000000A8.L|RW|XPT_T10|Trap #10                                       |
+$000000AC.L|RW|XPT_T11|Trap #11                                       |
+$000000B0.L|RW|XPT_T12|Trap #12                                       |
+$000000B4.L|RW|XPT_T13|Trap #13                                       |
+$000000B8.L|RW|XPT_T14|Trap #14                                       |
+$000000BC.L|RW|XPT_T15|Trap #15                                       |
+$000000C0.L|RW|FPU_BOS|FFCP Branc or Set                              |020+
+$000000C4.L|RW|FPU_INX|FFCP Inexact Result                            |020+
+$000000C8.L|RW|FPU_DBZ|FFCP Devide by Zero                            |020+
+$000000CC.L|RW|FPU_UNR|FFCP Underflow                                 |020+
+$000000D0.L|RW|FPU_OPE|FFCP Operand Error                             |020+
+$000000D4.L|RW|FPU_OVR|FFCP Overflow                                  |020+
+$000000D8.L|RW|FPU_NAN|FFCP signaling NAN                             |020+
+$000000DC.L|RW|   -   |reserved                                       |
+$000000E0.L|RW|XPT_MMU|MMU Configuration Error                        |030+
+$000000E4.L|RW|   -   |reserved                                       |
+$000000E8.L|RW|   -   |reserved                                       |
+$000000EC.L|RW|   -   |reserved                                       |
+$000000F0.L|RW|   -   |reserved                                       |
+$000000F4.L|RW|   -   |reserved                                       |
+$000000F8.L|RW|   -   |reserved                                       |
+$000000FC.L|RW|   -   |reserved                                       |
+$00000100.L|RW|XPT_CTR|B0 Centronix busy                              |*
+$00000104.L|RW|XPT_DCD|B1 RS232 DCD                                   |*
+$00000108.L|RW|XPT_CTS|B2 RS232 CTS                                   |*
+$0000010C.L|RW|XPT_BLT|B3 Blitter Done                                |*BLT
+$00000110.L|RW|XPT_T_D|B4 Timer D                                     |*
+$00000114.L|RW|XPT_T_C|B5 Timer C                                     |*
+$00000118.L|RW|XPT_KBD|B6 IKBD/MIDI                                   |*
+$0000011C.L|RW|XPT_FDC|B7 FDC/HDC                                     |*
+$00000120.L|RW|XPT_T_B|A0 Timer B                                     |*
+$00000124.L|RW|XPT_XMT|A1 Transmit Error                              |*
+$00000128.L|RW|XPT_EMP|A2 Transmit Buffer empty                       |*
+$0000012C.L|RW|XPT_REC|A3 Receive Error                               |*
+$00000130.L|RW|XPT_FUL|A4 Receive Buffer full                         |*
+$00000134.L|RW|XPT_T_A|A5 Timer A                                     |*
+$00000138.L|RW|XPT_RNG|A6 RS232 Ring Indicator                        |*
+$0000013C.L|RW|XPT_SND|A7 Monochrome Detect/Audio Subsystem           |*
+$00000140.L|RW|   -   |User defined Vectors                           |
+...........|RW|   -   |....................                           |
+$000003FC.L|RW|   -   |User defined Vectors                           |
+===========#==#=======#===============================================#=====
+----------------------|Random Access Memory                           |-----
+===========#==#=======#===============================================#=====
+$00000008.B|RW|RAM_TOP|RAM TOP                                        |
+...........|RW|   -   |.......                                        |
+$00CFFFFF.B|RW|RAM_END|RAM END (14MB)                                 |
+===========#==#=======#===============================================#=====
+----------------------|1BM System Read Only Memory                    |-----
+===========#==#=======#===============================================#=====
+$00E00000.B|R-|ROM_TOP|1MB ROM TOP                                    |F
+...........|R-|   -   |...........                                    |F
+$00F0003F.B|R-|ROM_END|1MB ROM END                                    |F
+===========#==#=======#===============================================#=====
+$00F00040.B|--|   -   |Illegal Address Space                          |
+...........|--|   -   |.....................                          |
+$00F9FFFF.B|--|   -   |Illegal Address Space                          |
+===========#==#=======#===============================================#=====
+----------------------|128KB Expanstion Cartidge Port                 |-----
+===========#==#=======#===============================================#=====
+$00FA0000.L|R-|ROM_PRT|Cartridge Magic($FA52235F=Diag,$ABCDEF42=User*)|
+$00FA0004.L|R-|ROM_CAL|Call Diagnostic Cardridge                      |
+...........|R-|   -   |............                                   |
+$00FBFFFF.B|R-|   -   |ROM Port END                                   |
+===========#==#=======#===============================================#=====
+----------------------|192KB System Read Only Memory                  |-----
+===========#==#=======#===============================================#=====
+$00FC0000.B|--|   -   |192KB ROM TOP                                  |ST
+...........|--|   -   |.............                                  |ST
+$00FEFFFF.B|--|   -   |192KB ROM END                                  |ST
+</pre>
+<br />
+<br />
+Back to [[Memory Map for Atari ST,STE,TT and Falcon]]
+
+[[Category:Memory Address]]
