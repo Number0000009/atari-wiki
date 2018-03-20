@@ -1,0 +1,73 @@
+==Central Processing Unit (CPU)==
+'''CPU''' stands for ''C''entral ''P''rocessing ''U''nit, and refers to the main computational processor in use on a given computer system
+The CPU's used in all [[Atari]] [[TOS Family]] were variations of the 68000 family and is commonly written as 680x0 where the x is one of the numbers that mark the class of the CPU.
+
+===MC68000===
+The [[Atari ST]] and Atari [[Mega ST]] series of computer uses the 8 MHz 32-bits Motorola 68000 CPU while the Atari [[Mega STE]] uses the 16 MHz version. Variant of the CPU can be found [http://en.wikipedia.org/wiki/Motorola_68000_family here].
+
+Motorola 68000 (MC68000) is the first member of 680x0 line of microprocessors. Internally the 68000 is a 32-bit microprocessor - it has 32-bit data and address registers. Externally the processor has 16-bit data bus and 24-bit address bus, which limits the size of addressable memory to 16 MB.
+
+HMOS 68000 processors were manufactured at speeds up to 16 MHz. HCMOS 68000 microprocessors were manufactured (May 2007) at speeds up to 20 MHz.
+
+''Source:[http://www.cpu-world.com/CPUs/68000/index.html CPU World]''
+
+===MC68030===
+The [[Atari Falcon]]030 and Atari [[TT]]030 computers uses the 32-bits Motorola 68030 CPU. The Falcon uses the 16 MHz version while the TT uses the 32 MHz version. 
+Variant of the CPU can be found [http://en.wikipedia.org/wiki/Motorola_68000_family here].
+
+Motorola 68030 (MC68030) is an enhanced version of 68020 microprocessor. The 68030 CPU has 32-bit address bus and can address up to 4 GB of physical memory. Data bus width on the MC68030 is dynamic - the CPU can work with 8-bit, 16-bit and 32-bit data buses. Both data and address buses can run in new synchronous mode - in this mode data transfer time is reduced up to 33%. Another new bus mode is a burst memory mode - the bus can transfer up to 4 long words (16 bytes of data) with average transfer time 1 clock cycle per long word. The 68030 integrates modified version of MC68851 Paged Memory Management Unit (PMMU). To control integrated PMMU the CPU has 4 new instructions.
+
+The MC68030 has better performance than the 68020 due to a few core enhancements:
+*The CPU has additional 256-byte data cache with one clock access time.
+*Access time for the instruction cache was reduced by 50% - from two to one clock cycle.
+*New burst memory interface can be used to quickly fill-in data and instruction caches.
+*On-chip MMU can perform address translation in parallel to other CPU functions.
+
+Like the 68020 microprocessor, the 68030 supports Motorola 68881 and 68882 co-processors.
+
+''Source:[http://www.cpu-world.com/CPUs/68030/index.html CPU World]''
+
+===MC68040===
+===MC68060===
+Some hardware CPU accelerator uses this type of 32 bits CPU.  Variant of the CPU can be found [http://en.wikipedia.org/wiki/Motorola_68000_family here].
+
+Motorola 68060 (MC68060) is the fourth and the last generation of 680x0 line of 32-bit microprocessors. The 68060 has two 4-stage pipelines, separate 8KB instruction and data caches, two Paged Memory Management Units - one for instructions and another for data, and two integer execution units. The 68060 integrates Floating-Point Unit compatible with Motorola 68881 / 68882 co-processors. The FPU provides hardware support only for most common floating-point instructions and data types. All unsupported instructions and data types are emulated in software.
+
+The Motorola 68060 is much faster than its predecessor, mainly due to higher clock speed (up to 75MHz), superscalar design, larger instruction and data caches and branch prediction. Under the best conditions the 68060 can execute one integer instruction and one Floating-Point instruction per clock cycle, or up to 2 integer instructions and one branch instruction per clock cycle. Not all integer instructions can be executed simultaneously. Also, the CPU cannot execute the instructions out of order.
+
+''Source:[http://www.cpu-world.com/CPUs/68060/index.html CPU World]''
+
+===Coldfire===
+The ColdFire is a microprocessor that derives from the Motorola 68000 family architecture, manufactured for embedded systems development by Freescale Semiconductor (formerly the semiconductor sector of Motorola). More information [http://en.wikipedia.org/wiki/Freescale_ColdFire here].
+
+==Floating Point Unit (FPU)==
+The floating point processor is a specialized chip that is optimized to perform fast floating point arithmetic. 
+
+===MC68881===
+The [[Atari ST]] series of computers can be modified to include the use of a FPU, the Motorola 68881. More information about the [http://en.wikipedia.org/wiki/Motorola_68881 68881 here].
+
+===MC68882===
+The [[Atari Falcon]]030 and Atari [[TT]]030 series of computers can be easily fitted with the Motorola 68882 as they come with sockets for an FPU.  More information about the [http://en.wikipedia.org/wiki/Motorola_68881 68882 here].
+
+===Differences between 68882 & 68881===
+Motorola 68882 (MC68882) is an enhanced version of 68881 Floating Point Unit. The 68882 is pin- and object-code compatible with the 68881, and, like the 68881, it could work with Motorola 68020 and 68030 microprocessors. The architecture of the 68882 FPU is similar to the 68881. The FPU has 8 directly-addressable 80-bit registers. It supports seven data types: 8-bit, 16-bit and 32-bit integers, single, double and extended-precision floating point numbers, and packed decimal strings. The 68882 always converts external operands into internal extended-precision format, and performs all calculations in this format. The MC68882 has the same instruction set as the 68881 co-processor.
+
+The 68882 FPU includes a few features that significantly improve its performance:
+*The 68882 may execute more than one floating-point instruction at the same time.
+*The MC68882 uses faster conversion method of external operands to/from FPU's internal format.
+To get maximum performance from the co-processor the programs needs to be re-compiled specifically for the 68882. The 68882 may run re-compiled programs up to two times faster than the 68881 FPU. Performance gain for older applications, i.e. applications compiled for Motorola 68881 co-processor, is usually is not as impressive - the FPU may run these programs up to 15 - 25% faster than the 68881.
+<br>
+''Source:[http://www.cpu-world.com/CPUs/68882/ CPU World]''
+
+==Digital Signal Processor (DSP)==
+A digital signal processor (DSP) is a specialized microprocessor with an architecture optimized for the fast operational needs of digital signal processing.
+
+===MC56001===
+The [[Atari Falcon]]030 uses the Motorola 56001 DSP chip. More information about the [http://en.wikipedia.org/wiki/Motorola_56000 56001 here].
+
+==Memory Management Unit (MMU)==
+===MC68851===
+The 68851 is an external memory management unit (MMU) which is designed to provided page memory support for 68010 or 68020. More information [http://en.wikipedia.org/wiki/Motorola_68851 available here].
+
+
+[[Category:Hardware Components]] [[Category:Coprocessors]]

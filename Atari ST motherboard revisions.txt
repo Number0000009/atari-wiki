@@ -1,0 +1,113 @@
+'''Atari ST motherboard revisions'''
+
+
+The Atari ST went through a fair amount of revisions during its lifetime.
+
+'''Please feel free to upload a picture of your motherboard.'''  '''<font color="red">Please keep your photo to 1.5 MB, thanks.</font>'''
+
+{| border="1" class="wikitable sortable" style="text-align:left"
+|-
+! Model Number || Rev || Model  || Add-ons || Photo || Notes || Submitted by 
+|-
+| C070115  || 2 || 520 ST  || ? || [[Image:ST_Motherboard_C07115_Rev_2_jokker.jpg|100px|C070115 Rev. 2]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=5341 jokker] 
+|-
+| C070243 || C || 520 ST+ || ? || [[Image:ST_Motherboard_C070243_Rev_C_Factor6.jpg|100px|C070243 Rev. C]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=14879 Factor6]
+|-
+| C070243 || E || 520 STM || None || [[Image:ST_Motherboard_C070243_Rev_E_520STM.jpg|100px|C070243 Rev. E]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=23006 galax]
+|-
+| C070243 || F || 520 STM || ? || [[File:ST_Motherboard_C070243_Rev_F_firyembers.JPG|100px|C070243 Rev. F]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1981 firyembers] 
+|-
+| C070243 || H || 520 STM || ? || [[Image:ST_Motherboard_C070243_Rev_H_520STM_Dio.jpg|100px|C070243 Rev. H]] ||PAL 520STM, thought to be original. Looks to have been made in early to mid 1987 - sticker (Silica Shop? My STFM had the same type) on the bottom said 12/87 so it may have sat in inventory for a bit. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=4279 Dio]
+|-
+| C070243 || H || 520 STM || ? || [[Image:ST_Motherboard_C070243_Rev_H.jpg|100px|C070243 Rev. H]] || Separate Floppy/PSU, On-main-board mouse/joystick, No support for 2-chip TOS || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera] 
+|-
+| C070243 || I || 520 STM || ? || [[Image:ST_Motherboard_C070243_Rev_I.jpg|100px|C070243 Rev. I]] || As H. Support for 2-chip TOS || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera] 
+|-
+| C070523-001 || C || 1040 STF || None || [[Image:1040STF_Rev_C_motherboard.jpg|100px|C070523 Rev. C]] || Another with TOS under the PSU. Makes changing TOS very tedious. || [http://www.atari-forum.com/wiki/index.php?title=User:1632 1632]
+|-
+| C070523-001 || D || 1040 STF || None || [[Image:1040stf_motherboard_revD.jpg|100px|C070523 Rev. D]] || Swedish TOS. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21911 Zhylo]
+|-
+| C070523-001 || D || ? || 20Mhz processor, Autoswitch overscan, 4MB memory, TOS 1.4/Kaos switch, HD/ED Floppy, High speed serial || [[Image:ST_Motherboard_C070523-001_Rev_D.jpg|100px|C070523-001 Rev. D]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1405 Nyh] 
+|-
+| C070523-001 || D || ? || ? || [[Image:ST_Motherboard_C070523-001_Rev_D_exxos.jpg|100px|C070523-001 Rev. D]] || Ram chips in a row at the bottom, TOS under where the PSU normally sits || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=304 exxos] 
+|-
+| C070523-001 || D || 520 STFM || 4MB Upgrade || [[Image:ST_Motherboard_C070523-001_Rev_D_floppydood.jpg|100px|C070523-001 Rev. D]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=9595 floppydood] 
+|-
+| C070523-001 || D || 520 STFM || None || [[Image:ST_Motherboard_C070523-001_Rev_D_Dio.jpg|100px|C070523-001 Rev. D]] || PAL 520STFM, TOS 1.02, purchased 12/86 with single-sided internal drive || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=4279 Dio] 
+|-
+| C070789-001 || B || 1040 STF || None || [[Image:ST_Motherboard_1040STF_C070789_001_Rev_B_push2fit.jpg|100px|C070789-001 Rev. B]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=6891 push2fit] 
+|-
+| C070789-001 || B || 520 STFM || None || [[Image:ST_Motherboard_C070789_001_Rev_B.jpg|100px|C070789-001 Rev. B]] ||  || [http://www.ataricommunity.com/forums/member.php?u=309895 roy strange] 
+|-
+| C070789-001 || B || 520 STFM || None || [[Image:ST_Motherboard_C070789_Rev_B_520STFM_Dio.jpg|100px|C070789-001 Rev. B]] || PAL 520STFM, late 87. Not quite original; has a yellow/green LED keyboard but a red/red top cover, and the drive hole has been filed around, so presumably was SS and swapped to DS. Doesn't look to have any mods though. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=4279 Dio]
+|-
+| C070789-001 || C || 520 STFM || None || [[Image:ST_Motherboard_C070789-001_Rev_C.jpg|100px|C070789-001 Rev. C]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=486 insanity] 
+|-
+| C070789-001 || C || 520 STFM || 1MB Upgrade || [[Image:ST_Motherboard_C070789-001_Rev_C_baz2.jpg|100px|C070789-001 Rev. C]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=486 insanity] 
+|-
+| C070789-001 || C || 520 STFM || 4MB 72pin BETA Hack & test 1.44 floppy upgrade || [[Image:ST_Motherboard_C070789-001_Rev_C_exxos.jpg|100px|C070789-001 Rev. C]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=304 exxos] 
+|-
+| C070789-001 || C || 520 STFM || 30pin 4MB hacked, Dual TOS, and prototype 1.44 floppy upgrade || [[Image:ST_Motherboard_C070789-001_Rev_C_exxos2.jpg|100px|C070789-001 Rev. C]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=304 exxos] 
+|-
+| C070789-001 || D || 520 STFM || None || [[Image:ST_Motherboard_C070789_Rev_D_520STFM_Dio.jpg|100px|C070789-001 Rev. B]] || PAL 520STFM. Serial number indicates 1988 or 89 - surprisingly late for this board layout, the custom chips have the iMP logo. Ribbon cables are for the half meg RAM expansion. Floppy drive looks to be original and is DS.|| [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=4279 Dio] 
+|-
+| C070789-001 || F || 1040 STFM || 1.44 floppy upgrade || [[Image:ST_Motherboard_C070789-001-Rev-F.jpg|100px|C070789-001 Rev. F]] || TOS 1.04 Polish version || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=25215 dazarz] 
+|-
+| C070859-001 || _ || 1040 STF || None || [[Image:ST_Motherboard_1040STF_C070859_001_Rev_push2fit.jpg|100px|C070789-001 Rev. C]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=6891 push2fit] 
+|-
+| C070523-001  || C || 2080 STF  || 2MB Upgrade || [[Image:ST_Motherboard_C070523-001_Rev_C_Stelios1978.jpg|100px|C070523-001 Rev. C]] || 2M ST YU Board || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=22134 Stelios1978]
+|-
+| C100167-001 || 4.0 || Mega ST (4MB) || ? || [[Image:ST_Motherboard_C100167-001_Rev_4_0.jpg|100px|C100167-001 Rev. 4.0]] || Original ROMs replaced with Flash EPROMs || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera]
+|- 
+| C100167-001 || B || Mega 4 || Blitter patch || [[Image:Mega_4.jpg|100px|C100167-001 Rev. B]] || 2 TOS ROMS || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21168 qq1975b]
+|- 
+| C100167-001 || 5.0 || Mega ST2 || ? || [[Image:ST_Motherboard_C100167-001_Rev_5_0_jokker.jpg|100px|C100167-001 Rev. 5.0]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=5341 jokker] 
+|-
+| C103088 C103253 || 3. 1. || 520 STFM || None || [[Image:ST_Motherboard_C103088_Rev_3_C103253_Rev_1.jpg|100px|C103088 Rev. 3 C103253 Rev. 1]] || || [http://www.ataricommunity.com/forums/member.php?u=309895 roy strange] 
+|-
+| C103088 C103253 || 5. 3. || 520 STFM || None || [[Image:ST_Motherboard_C103253_Rev_3_C103088_Rev_5_exxos.jpg|100px|C103088 Rev. 5 C103253 Rev. 3]] || Ram chips normally where the ROM is, ROM is under the PSU. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=304 exxos] 
+|-
+| C103175 || 1 || 1040 STF || None || [[Image:ST_Motherboard_1040STF_C103175_Rev_1_push2fit.jpg|100px|C103175 Rev. 1.1]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=6891 push2fit] 
+|-
+| C103175 || 1.1 || 1040 STFM || ? || [[Image:ST_Motherboard_C103175_Rev_1_1.jpg|100px|C103175 Rev. 1.1]] || 4bit RAM chips || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera] 
+|-
+| C103225 || 1 || 1040 STFM || None || [[File:ST_Motherboard_C103225_Rev_1.jpg|100px|C103225 Rev 1]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21372 dougforpres]
+|-
+| C103414-001 || 1 || 520 STFM || 1MB Upgrade || [[Image:ST_Motherboard_C103414-001_Rev_1.jpg|100px|C103414-001 Rev. 1]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=28 Stefan jL] 
+|-
+| C103414-001 || 1.1 || 520 STFM || None || [[Image:ST_Motherboard_C103414-001_Rev_1_1.jpg|100px|C103414 Rev. 1.1]] || Similar to Rev. 1 above but 2-chip TOS and chip in space below labelled LS11 || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=486 insanity] 
+|-
+| C103414-001 || 1.1 || 520 STFM || None || [[Image:ST_Motherboard_C103414-001_Rev_1_1_exxos.jpg|100px|C103414 Rev. 1.1]] || SMT for MMU & GLUE, Smaller SMT RAM chips only 4 || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=304 exxos] 
+|-
+| C103999-001 || B || STACY || None || [[Image:STACY_Motherboard_C103999-001_Rev_B_DarkLord.JPG|100px|C103999-001 Rev. B]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1218 DarkLord] 
+|-
+| C300720-001 || A || TT030 || None || [[Image:sm_img_9429.jpg|100px|C300720-001 Rev A]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=502 krupkaj]
+|-
+| CA401146-001 || H || TT030 || None || [[Image:sm_img_9430.jpg|100px|CA401146-001 Rev H]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=502 krupkaj]
+|-
+| CA401177 || ? || STE  || ? || [[Image:ST_Motherboard_STE_CA401177_FrankB.jpg|100px|CA401177 Rev ?]] || Surface mounted 68000 CPU || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=2186 Frank B]
+|-
+| CA4003290 || _ || STE || ? || [[Image:ST_Motherboard_CA4003290_Rev_ppera.jpg|100px|CA4003290 Rev _]] || Small board at top, right is HD floppy circuit. There is IDE IF too, with experimental hot-swap support, therefore so many chips soldered. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera]
+|-
+| CA4003290 || ? || STE  || ? || [[Image:ST_Motherboard_Mega_STE_CA4003290_decky.jpg|100px|CA4003290 Rev ?]] ||  || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=8682 Decky]
+|-
+| CA4003290 || _ || STE || ? || [[Image:ST_Motherboard_CA4003290_Rev_stefan_jl.jpg|100px|CA4003290 Rev _]] || || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=28 Stefan jL]
+|-
+| Unknown || ? || Mega STE  || ? || [[Image:ST_Motherboard_Mega_STE_Unknown_ppera.jpg|100px|Unknown ?]] || ACSI-SCSI adapter is modded, and supports drives over 1GB || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=1905 ppera]
+|-
+| CA4003290 || _ || STE || None || [[Image:Ste_bottom.JPG|100px|CA4003290 Rev _]] || The bottom side of a regular CA4003290 STE motherboard || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21093 Troed]
+|-
+| C100167 || 5.0 || Mega ST4 || Blitter || [[Image:Mega_st4_c100167_5_0.jpg|100px|C100167 Rev 5.0]] || No TOS installed on the pic. This revision came without a blitter from factory, added later. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21093 Troed]
+|-
+| CA400677 || F || Mega STE  || None || [[Image:Mega_ste_CA400677_revf_top_small.JPG|100px| CA400677 Rev F]] || Aftermarket 16Mhz tested 1772 with QC-sticker || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21093 Troed]
+|-
+| CA400677 || F || Mega STE  || None || [[Image:Mega_ste_CA400677_revf_bottom_small.JPG|100px| CA400677 Rev F]] || Bottom side of the same motherboard as above. The visible patch is Atari original. || [http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=21093 Troed]
+|-
+|}
+
+<br /><br />
+Back to [[Atari ST]]
+
+[[Category:Atari computers]]
+[[Category:Hardware]]
+[[Category:Hardware_Components]]

@@ -1,0 +1,366 @@
+The following is a pseudo code description of how the circuitry involved in creating scanlines, including sync pulses and displaying of pixel data, functions in the Atari ST and STE. By following the logic described here it's possible to implement emulators and simulators that will be able to run existing Atari ST and STE programs that make use of "sync tricks" to create fullscreens and sync scrollers.
+
+Disclaimer: This page has as a goal to contain everything that's currently known, but by no means it should be considered complete.
+
+
+''Collected, edited, researched and typed up by Troed of SYNC''
+
+
+Information used to create these tables has mostly been sourced from the people below, but a general thanks goes out to everyone who's ever written anything on the subject.
+
+* Alien of ST Connexion (Overscan Techniques part I and II) [http://alive.atari.org/alive9/ovrscn1.php] [http://alive.atari.org/alive11/menutext.php]
+* Paulo Simoes (posts on Atari-Forum, wakestate discovery and ST documentation) [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=183] 
+* Dio (posts on Atari-Forum, trace diagrams, DE-to-LOAD) [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=363]
+* Troed of SYNC (GLUE-CPU wakestate hypothesis, STE pre-fetch impact) [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=407]
+* Ijor (original research and confirmation from chip-decaps) [http://www.atari-forum.com/viewtopic.php?f=16&t=29658]
+
+== Horizontal GLUE state machine, ST ==
+
+Due to lack of synchronisation between GLUE and CPU when an ST is powered on both chips, while running at 8MHz, can be offset from each other. This is the hypothesised cause behind what's known as ST "wakeup modes" (where two were known and documented beginning 2006 [http://www.atari-forum.com/viewtopic.php?f=68&t=9527&start=34]) and more recently divided into two more making four in total, now known as "wakestates" (2013) [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=147].
+
+At each cycle in the table below, as seen by the CPU, the value can be offset 0-3 cycles set when the ST is powered on. This offset does not change when reset, only when powered off and on again. While this looks like an emulator/simulator needing to be one-cycle accurate to fully capture these modes it's as far as currently known not needed. Since sync tricks can only be made with a resolution of two cycles (by using EXG+MOVE and similar instructions) it's possible to emulate all tricks with two cycle emulation granularity as well.
+
+The GLUE combines the values of $ff820a (FREQ) and $ff8260 (RES) for its purposes. The tables use the short form 50/60/71 to represent that combined value.
+
+{|
+|VAR H
+|H signal as per Alien's doc, combines with V and becomes DE detected by MMU
+|-
+|VAR LINE
+|(LORES) NTSC by default; PAL = 512 cycle 50Hz, NTSC = 508 cycle 60Hz, HIRES = 224 cycle 71Hz
+|-
+|VAR BLANK
+|Activate blank if true.
+|-
+|VAR HSYNC
+|Activate hsync if true.
+|}
+
+{| cellspacing="0" border="1" cellpadding="4"
+!Cycle
+!Action
+|-
+|4
+|IF(71) H = TRUE
+|-
+|24
+|IF(60) BLANK = FALSE
+|-
+|28
+|IF(50) BLANK = FALSE
+|-
+|30
+|Unknown. Needs to be !71 in non-mono lines.
+|-
+|52
+|IF(60) H = TRUE
+|-
+|54
+|IF(60) LINE = 508 ELSEIF(50) LINE = 512
+|-
+|56
+|IF(50) H = TRUE
+|-
+|164
+|IF(71) H = FALSE
+|-
+|184
+|IF(71) BLANK = TRUE
+|-
+|372
+|IF(60) H = FALSE
+|-
+|376
+|IF(50) H = FALSE
+|-
+|450
+|IF(!71) BLANK = TRUE
+|-
+|LINE-50
+|IF(!71) HSYNC = TRUE && H = FALSE
+|-
+|LINE-10
+|IF(!71) HSYNC = FALSE
+|}
+
+Due to the internal workings of the GLUE it will latch 820a (FREQ) one cycle later than 8260 (RES). At any specific comparison cycle this means the GLUE will use the FREQ value written one cycle before RES.
+
+* Offset 0 reads values at cycle 56 (FREQ) and 57 (RES)
+* Offset 1 reads values at cycle 57 (FREQ) and 58 (RES)
+* Offset 2 reads values at cycle 58 (FREQ) and 59 (RES)
+* Offset 3 reads values at cycle 59 (FREQ) and 60 (RES)
+
+The above, as seen by a program running on the CPU, means that to be able to change the values of the registers for the GLUE to pick them up in the current wakestate they need to have been done at the following cycles:
+
+* WS1 (DL6): Changes made by 56 (FREQ), 56 (RES)
+* WS3 (DL5): Changes made by 56 (FREQ), 58 (RES)
+* WS4 (DL4): Changes made by 58 (FREQ), 58 (RES)
+* WS2 (DL3): Changes made by 58 (FREQ), 60 (RES)
+
+As can be seen above these four different combinations have been given their own numbering - they are the four known wakestates. Any program that needs to do detailed sync manipulation, depending on how detailed, needs to detect which wakestate the ST is in and modify its timing. Since wakeup modes were only documented and detected in 2006, some classic demos shows such side effects. The TCB "tv-snow" screen in Swedish New Year Demo has a disting logo that's only centered in wakestate 2 - in all the others it's offset to the left. [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=342]
+
+The DL3-DL6 moniker in parenthesis above is another way to name the wakestates, after how long the delay is between the GLUE raising DE (Display Enable), which it does one cycle later than the checks described above, and the MMU detecting it [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=274]. This has also the side effect of the wakestates being physically offset on screen by one pixel from eachother - WS2 (DL3) leftmost and WS1 (DL6) rightmost. This is caused by monitors using HSYNC to place the screen and depending on wakestate the distance between the HSYNC pulse and the displayed pixels differs.
+
+== MMU, ST ==
+
+{|
+|VAR DE
+|The H signal from GLUE above combined with V
+|-
+|VAR LOAD
+|Signal sent to Shifter for each new memory read available
+|}
+
+MMU detects GLUE DE at cycle 62 and raises LOAD at cycle 64. From this we can calculate the DL-moniker [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=274] for the ST wakestates depending on when GLUE raised DE:
+
+* 64-58 = 6 = DL6
+* 64-59 = 5 = DL5
+* 64-60 = 4 = DL4
+* 64-61 = 3 = DL3
+
+After LOAD it takes 16 cycles, plus 2 due to internal delays, for the Shifter to set the first values on the RGB pins. As long as DE is high LOAD will loop with new data available. For each word read by the Shifter the MMU will increase the video counter.
+
+Note: These cycle timings are NOT affected by ST wake states
+
+Examples:
+* Cycle 8, GLUE raised DE. MMU will raise LOAD at cycle 12
+* Cycle 60, GLUE raised DE. MMU will raise LOAD at cycle 64
+* Cycle 380, GLUE lowered DE. MMU will no longer raise LOAD from cycle 384
+
+== Horizontal GST MCU state machine, STE ==
+
+In the STE the GLUE and MMU were combined into a single circuit, the GST MCU. This also meant that the GLUE and CPU were no longer offset by 0-3 cycles as on the ST but fully synchronised at 0. Thus there are no GLUE wakeup modes/wakestates known on the STE. Several changes were however made to accommodate hardware scroll support where one of the more notable ones was an earlier check for starting the screen in high res (= left border) which caused many older border removing demos to fail.
+
+{|
+|VAR H
+|H signal as per Alien's doc, combines with V and becomes DE
+|-
+|VAR PRELOAD
+|MMU starts LOADing Shifter with words for hardware scroll purposes, no screen address changes
+|-
+|VAR LINE
+|(LORES) NTSC by default; PAL = 512 cycle 50Hz, NTSC = 508 cycle 60Hz, HIRES = 224 cycle 71Hz
+|-
+|VAR BLANK
+|Activate blank if true.
+|-
+|VAR HSYNC
+|Activate hsync if true.
+|}
+
+{| cellspacing="0" border="1" cellpadding="4"
+!Cycle
+!Action
+|-
+|0
+|IF(71) PRELOAD = TRUE
+|-
+|24
+|IF(60) BLANK = FALSE
+|-
+|28
+|IF(50) BLANK = FALSE
+|-
+|28
+|Unknown. Needs to be !71 in non-mono lines.
+|-
+|36
+|IF(60) PRELOAD = TRUE
+|-
+|40
+|IF(50) PRELOAD = TRUE
+|-
+|56
+|IF(60) LINE = 508 ELSEIF(50) LINE = 512
+|-
+|58
+|Also related to line length similar to above for 50/60Hz. Unknown cause.
+|-
+|164
+|IF(71) H = FALSE
+|-
+|184
+|IF(71) BLANK = TRUE
+|-
+|372
+|IF(60) H = FALSE
+|-
+|376
+|IF(50) H = FALSE
+|-
+|448
+|IF(!71) BLANK = TRUE
+|-
+|LINE-52
+|IF(!71) HSYNC = TRUE && H = FALSE
+|-
+|LINE-12
+|IF(!71) HSYNC = FALSE
+|}
+
+The following pseudo code describes how PRELOAD gets handled:
+
+ WORDS_READ=0
+ WHILE(PRELOAD == TRUE) {
+   LOAD
+   WORDS_READ++
+   IF(RES == HIGH AND WORDS_READ=>1) PRELOAD = FALSE
+   IF(RES == LO AND WORDS_READ=>4) PRELOAD = FALSE
+ }
+ H = TRUE
+
+In regular HI resolution the routine will exit after four cycles (one word) and in LO resolution it will take 16 cycles (four words). This is what makes the STE timings for raised DE match up with ST. It's also why it's possible to create +20 (left border), +4 and +6 (regular) line by disrupting this code, according to the following:
+
+{| cellspacing="0" border="1" cellpadding="4"
+!Cycle
+!Action
+!Result
+|-
+|4
+|IF(RES == LO) PRELOAD will run until cycle 16
+|(56-16)/2 = +20
+|-
+|44
+|IF(RES == HI) PRELOAD will exit after 4 cycles
+|(376-44)/2 = +6
+|-
+|48
+|IF(RES == HI) PRELOAD will exit after 8 cycles
+|(376-48)/2 = +4
+|}
+
+Todo: Describe when H becomes DE in cycles as already done for ST MMU
+
+== Vertical GLUE/GST-MCU state machine, ST/STE ==
+
+{|
+|VAR V
+|V signal as per Alien's doc, combines with H and becomes DE
+|-
+|VAR VBLANK
+|Activate vblank if true. When VBLANK is set no RES/FREQ checks are made (or simply no DE changes?)
+|}
+
+{| cellspacing="0" border="1" cellpadding="4"
+!Line
+!Cycle
+!Action
+|-
+|34
+|502
+|IF(60) V = TRUE
+|-
+|47/63
+|502
+|IF(50) V = TRUE
+|-
+|234
+|502
+|IF(60) V = FALSE
+|-
+|247/263
+|502
+|IF(50) V = FALSE
+|-
+|258
+|502
+|IF(60) VBLANK = TRUE
+|-
+|308
+|502
+|IF(50) VBLANK = TRUE
+|}
+
+* '''47'''/63 and '''247'''/263 are what's known as the "short top border" STs. A few early models apparently had a different GLUE revision where the PAL 50Hz screen began higher up, which was then subsequently changed.
+* Number of lines that will be displayed is likely to be decided when the screen starts, just as number of cycles in a line. Untested.
+* It's possible to avoid VBLANK at line 308, which will result in two extra full lines of graphics as well as a few pixels on line 311 until VSYNC kicks in hard at cycle ~30
+
+Todo: Update table with RES equivalents.
+
+== Shifter state machine ==
+
+Regular sync scrolling is made with changes affecting GLUE. 4-pixel sync scrolling as well as the cause for "stable" and "unstable" sync lines is due to Shifter.
+
+'''Work in progress. Please read through Alien's articles first for terminology. This writeup will be expanded upon in time, and likely contains severe errors.'''
+
+The Shifter has two types of registers. A four word FIFO buffer ("IR" in Alien's articles) and four words used as shift-registers ("RR") that are shifted out every cycle together with a palette lookup that sets the correct value on the RGB/Mono pins. When Shifter receives LOAD from the MMU it will read a word to the FIFO. The shift-registers are constantly shifting out data. In low resolution all four words shift together, in medium resolution two of them shift together and in high resolution one shift at a time. Every 16 cycles a check is made to see whether the FIFO is full and the contents will then be copied to RR.  If DE is not active, LOAD will not be asserted, the FIFO will not be refilled, and RR will not be updated. When RR is not updated with new data, the registers will be 0, and the border color will be displayed.
+
+The concept of a FIFO is hypothesized to be the explanation for "every other 16 pixels black", a Shifters substate that in reality is border color (palette 0), and is only "every other" in low resolution. In high resolution it's every fifth group of 16 pixels. The cause is speculated to be that sometimes the copy from IR to RR simply fails. This will cause all zeros (palette 0) to be shifted out for 16 cycles. Since the next group of 16 pixels are displayed in the correct position one word must've been pushed out from the FIFO and the next have been added correctly.
+
+== Sync line lengths ==
+
+Sync scrollers are created by combining scanlines of different lengths, as read in bytes, to cause the displayed screen to be offset by a chosen amount. It's possible to calculate the amount of bytes lines created by modifying the FREQ and RES registers in GLUE use as follows (see the GLUE state machines for the specific actions needed):
+
+{| cellspacing="0" border="1" cellpadding="4"
+! Bytes
+! Method
+|-
+|0
+|DE never activated
+|-
+|54
+|DE activated at 60, deactivated at 168. (168-60)/2 = 54
+|-
+|56
+|DE activated at 56, deactivated at 168. (168-56)/2 = 56
+|-
+|80
+|DE activated at 8, deactivated at 168. (168-8)/2 = 80
+|-
+|158
+|DE activated at 60, deactivated at 376. (376-60)/2 = 158
+|-
+|160
+|DE activated at 56, deactivated at 376. (376-56)/2 = 160
+|-
+|160
+|DE activated at 60, deactivated at 380. (380-60)/2 = 160
+|-
+|162
+|DE activated at 56, deactivated at 380. (380-56)/2 = 162
+|-
+|184
+|DE activated at 8, deactivated at 376. (376-8)/2 = 184
+|-
+|186
+|DE activated at 8, deactivated at 380. (380-8)/2 = 186
+|-
+|204
+|DE activated at 60, deactivated at 468. (468-60)/2 = 204
+|-
+|206
+|DE activated at 56, deactivated at 468. (468-56)/2 = 206
+|-
+|230
+|DE activated at 8, deactivated at 468. (468-8)/2 = 230
+|}
+
+The above examples are PAL, as most demos use. It's however equally easy to calculate how wide (in bytes - multiply by two to get pixels) a left border would be in NTSC compared to PAL:
+
+* DE activated at 8 compared to regular NTSC line at 56. (56-8)/2 = 24 bytes
+* DE activated at 8 compared to regular PAL line at 60. (60-8)/2 = 26 bytes
+
+And a right border:
+
+* DE deactivated at 468 compared to regular PAL line at 380. (468-380)/2 = 44 bytes
+* DE deactivated at 464 compared to regular NTSC line at 376. (464-376)/2 = 44 bytes
+** Note: An NTSC line is 508 cycles instead of 512 so the deactivation due to HSYNC will happen at 464
+
+Paulo has written a test program for ST that displays many of the possible combinations, attached to a forum post here: [http://www.atari-forum.com/viewtopic.php?f=16&t=24855&start=181]
+
+== Clean vs sync disrupting ==
+
+Some effects possible to make by changing state of the GLUE also cause changes to the signals BLANK and HSYNC. Depending on how forgiving the monitor/TV set used is these effects might seems fully working, or cause "bent" lines or discolorisation of parts of the screen. As a general rule these signals should not be modified, but since they have been in demos this is a brief documentation of their effects (timings used are ST, see STE state machine for counterparts):
+
+* Delaying BLANK at 450 - caused by the use of HI/LO stabilizer at 444/456. Additional pixel data, if existing, will be displayed and could cause sync signal disruption.
+* Cancelling HSYNC at 462 - black line (no pixels shown) and disrupted sync signal if right border wasn't removed
+* Cancelling HSYNC at 462 - fully displayed line with disrupted sync signal if the right border had been opened, Display Enable constantly set. This is done by mistake by the initialization code in the game Enchanted Lands by TCB [http://www.atari-forum.com/viewtopic.php?f=68&t=9527&start=114]
+* Extending HSYNC at 502 - 0 byte line and disrupted sync signal.
+* Extending BLANK at 30 - 0 byte line and disrupted sync signal.
+
+It's possible (currently untested) that using MID/LO stabilizer at 440/456 (also known as "ULM stabilizer") won't delay BLANK. For the other cases there are other ways to black out a line as well as creating 0 byte lines that do not disrupt sync.
+
+== Future research / Incomplete ==
+
+* the 14 byte line (RES = HI at cycle 32 will cause HSYNC which will cancel DE 4 cycles later. (36-8)/2 = 14) (disrupts sync and shouldn't be used anyway)
+* Shifter state machine
